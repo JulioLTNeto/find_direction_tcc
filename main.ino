@@ -70,9 +70,13 @@ int angulos(float resultado) {
 }
 
 void verificar_posicao(){
-  float resultado_leste_oeste = valor_sensor_leste / valor_sensor_oeste;
-  float resultado_oeste_leste = valor_sensor_oeste / valor_sensor_leste;
-
+  float resultado_leste_oeste = float(abs(valor_sensor_leste-valor_medio_leste)) / (abs(valor_sensor_oeste-valor_medio_oeste));
+  float resultado_oeste_leste = float(abs(valor_sensor_oeste-valor_medio_oeste)) / (abs(valor_sensor_leste-valor_medio_leste));
+  // Serial.println(abs(valor_sensor_leste-valor_medio_leste));
+  // Serial.println(abs(valor_sensor_oeste-valor_medio_oeste));
+  // Serial.println(resultado_leste_oeste);
+  // Serial.println(resultado_oeste_leste);
+  // Serial.println("");
   if(contador > 3000 and ((valor_sensor_leste > valor_medio_leste+sensibilidade) || (valor_sensor_norte > valor_medio_norte+sensibilidade) || (valor_sensor_oeste > valor_medio_oeste+sensibilidade) || (valor_sensor_sul > valor_medio_sul+sensibilidade))){
 
     Serial.print("Sensor Leste: ");
@@ -98,10 +102,10 @@ void verificar_posicao(){
         //direção leste-norte.
         if(resultado_oeste_leste < 0.1){
           // bluetooth.println("Oeste"); // Envia a string "Ola Mundo"via Bluetooth
-          Serial.println("Oeste");
+          Serial.println("Leste");
         }else if(resultado_oeste_leste >= 0.1 and resultado_oeste_leste <= 0.675){
           //bluetooth.println("Noroeste"); // Envia a string "Ola Mundo"via Bluetooth
-          Serial.println("Noroeste"); 
+          Serial.println("Nordeste"); 
         }else{
           //bluetooth.println("Norte"); // Envia a string "Ola Mundo"via Bluetooth
           Serial.println("Norte");    
@@ -113,10 +117,10 @@ void verificar_posicao(){
         quadrante = 1;
         if(resultado_leste_oeste < 0.1){
          // bluetooth.println("Leste"); // Envia a string "Ola Mundo"via Bluetooth
-          Serial.println("Leste");
+          Serial.println("Oeste");
         }else if(resultado_leste_oeste >= 0.1 and resultado_leste_oeste <= 0.675){
         //  bluetooth.println("Nordeste"); // Envia a string "Ola Mundo"via Bluetooth
-          Serial.println("Nordeste"); 
+          Serial.println("Noroeste"); 
         }else{
         //  bluetooth.println("Norte"); // Envia a string "Ola Mundo"via Bluetooth
           Serial.println("Norte");    
@@ -131,10 +135,10 @@ void verificar_posicao(){
           quadrante = 3;
           if(resultado_oeste_leste < 0.1){
            // bluetooth.println("Oeste"); // Envia a string "Ola Mundo"via Bluetooth
-            Serial.println("Oeste");
+            Serial.println("Leste");
           }else if(resultado_oeste_leste >= 0.1 and resultado_oeste_leste <= 0.675){
            // bluetooth.println("Sudoeste"); // Envia a string "Ola Mundo"via Bluetooth
-            Serial.println("Sudoeste"); 
+            Serial.println("Sudeste"); 
           }else{
           //  bluetooth.println("Sul"); // Envia a string "Ola Mundo"via Bluetooth
             Serial.println("Sul");    
@@ -146,7 +150,7 @@ void verificar_posicao(){
           quadrante = 2;
           if(resultado_leste_oeste < 0.1){
           //  bluetooth.println("Leste"); // Envia a string "Ola Mundo"via Bluetooth
-            Serial.println("Leste");
+            Serial.println("Oeste");
           }else if(resultado_leste_oeste >= 0.1 and resultado_leste_oeste <= 0.675){
           //  bluetooth.println("Sudoeste"); // Envia a string "Ola Mundo"via Bluetooth
             Serial.println("Sudoeste"); 
